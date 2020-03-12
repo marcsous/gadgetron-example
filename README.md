@@ -17,7 +17,8 @@ An example of how to use matlab gadgets in [this old version](https://github.com
 ```gadgetron_ismrmrd_client -f testdata.h5 -C ./matlab_recon.xml```
 
 6. Hopefully now the ```gadgetron``` server will spring to life
-```03-11 17:39:58.315 INFO [main.cpp:101] Starting Gadgetron (version 3.17.0)
+```
+03-11 17:39:58.315 INFO [main.cpp:101] Starting Gadgetron (version 3.17.0)
 03-11 17:39:58.315 INFO [main.cpp:193] Starting ReST interface on port 9080
 03-11 17:39:58.325 INFO [main.cpp:205] Starting cloudBus: localhost:8002
 03-11 17:39:58.326 INFO [main.cpp:253] Configuring services, Running on port 9002
@@ -88,8 +89,10 @@ matlab_recon: maximum pixel value = 1272.4
 7. There should be a new file ```out.h5``` in the current directory
 
 8. Read it into Matlab - again using the mysterious HDF5 - and take a look.
-```info = h5info('~/gadgetron/example/out.h5');
+```
+info = h5info('~/gadgetron/example/out.h5');
 im = h5read('~/gadgetron/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
-imagesc(im(:,:,17))```
+imagesc(im(:,:,17))
+```
 
 9. If this works then you are ready to move onto the scanner.
