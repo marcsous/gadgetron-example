@@ -1,6 +1,6 @@
 # gadgetron-example
 
-An example of how to use matlab gadgets in [this old version](https://github.com/marcsous/gadgetron) of gadgetron.
+An example of how to use matlab gadgets using an [old version](https://github.com/marcsous/gadgetron) of gadgetron.
 
 1. Start by installing the [old version](https://github.com/marcsous/gadgetron) of gadgetron
 
@@ -12,7 +12,7 @@ An example of how to use matlab gadgets in [this old version](https://github.com
 
 ```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 -z 2 --user-map ./IsmrmrdParameterMap_Siemens_matlab.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens_matlab.xsl```
 
-5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which uses the ```matlab_recon.m``` script
+5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which points to the ```matlab_recon.m``` script
 
 ```gadgetron_ismrmrd_client -f testdata.h5 -C ./matlab_recon.xml```
 
@@ -94,5 +94,3 @@ info = h5info('~/gadgetron/example/out.h5');
 im = h5read('~/gadgetron/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
 imagesc(im(:,:,17))
 ```
-
-9. If this works then you are ready to move onto the scanner.
