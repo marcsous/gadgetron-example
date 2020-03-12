@@ -88,7 +88,6 @@ matlab_recon: maximum pixel value = 1272.4
 7. There should be a new file ```out.h5``` in the current directory
 
 8. Read it into Matlab - again using the mysterious HDF5 - and take a look.
-
 ```info = h5info('~/gadgetron/example/out.h5');
 im = h5read('~/gadgetron/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
 imagesc(im(:,:,17))```
