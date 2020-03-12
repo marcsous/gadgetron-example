@@ -2,7 +2,7 @@
 
 An example of how to use matlab gadgets in [this old version](https://github.com/marcsous/gadgetron) of gadgetron.
 
-1. Start by installing the [old version](https://github.com/marcsous/gadgetron) 
+1. Start by installing the [old version](https://github.com/marcsous/gadgetron) of gadgetron
 
 2. Launch ```gadgetron``` server
 
