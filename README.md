@@ -83,9 +83,9 @@ matlab_recon: maximum pixel value = 1272.4
 03-11 17:40:07.389 DEBUG [Gadget.h:186] Gadget (MatlabAcquisition) thread finished
 03-11 17:40:07.389 DEBUG [MatlabGadget.h:87] Closing down Matlab
 03-11 17:40:10.642 DEBUG [Gadget.h:123] Shutting down Gadget (MatlabAcquisition)
-...```
+```
 
-7. There should be a file ```out.h5``` in the current directory
+7. There should be a new file ```out.h5``` in the current directory
 
 8. Read it into Matlab - again using the mysterious HDF5 - and take a look.
 
