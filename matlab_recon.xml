@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gadgetronStreamConfiguration xsi:schemaLocation="http://gadgetron.sf.net/gadgetron gadgetron.xsd"
+        xmlns="http://gadgetron.sf.net/gadgetron"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         
+    <reader>
+      <slot>1008</slot>
+      <dll>gadgetron_mricore</dll>
+      <classname>GadgetIsmrmrdAcquisitionMessageReader</classname>
+    </reader>
+ 
+     <writer>
+      <slot>1022</slot>
+      <dll>gadgetron_mricore</dll>
+      <classname>MRIImageWriter</classname>
+    </writer>
+<!--
+    <gadget>
+	  <name>NoiseAdjust</name>
+	  <dll>gadgetron_mricore</dll>
+	  <classname>NoiseAdjustGadget</classname>
+    </gadget>
+
+    <gadget>
+      <name>RemoveROOversampling</name>
+      <dll>gadgetron_mricore</dll>
+      <classname>RemoveROOversamplingGadget</classname>
+    </gadget>
+-->
+
+   <gadget>
+     <name>MatlabAcquisition</name>
+     <dll>gadgetron_matlab</dll>
+     <classname>AcquisitionMatlabGadget</classname>
+     <property><name>matlab_path</name><value>~/example</value></property>
+     <property><name>matlab_classname</name><value>matlab_recon</value></property>
+     <property><name>matlab_port</name><value>3001</value></property>
+     <property><name>matlab_buffer_time_ms</name><value>100</value></property>
+  </gadget>
+
+
+  <gadget>
+    <name>Extract</name>
+    <dll>gadgetron_mricore</dll>
+    <classname>ComplexToFloatGadget</classname>
+  </gadget>
+
+    <gadget>
+      <name>FloatToShort</name>
+      <dll>gadgetron_mricore</dll>
+      <classname>FloatToUShortGadget</classname>
+    </gadget>
+
+    <gadget>
+      <name>ImageFinish</name>
+      <dll>gadgetron_mricore</dll>
+      <classname>ImageFinishGadget</classname>
+    </gadget>
+
+</gadgetronStreamConfiguration>
