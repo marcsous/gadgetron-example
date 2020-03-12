@@ -112,14 +112,15 @@ classdef matlab_recon < handle & BaseGadget
                 
                 % image scaling is a mess...
                 if g.FFTScaleFactor==3200
-					tmp = sort(abs(img(:))); maximum_pixel_value = median(tmp(1:10)); % largest few pixels
+					maximum_pixel_value = max(abs(img(:)));
 					if (maximum_pixel_value>0 && maximum_pixel_value < 10) || (maximum_pixel_value > 4095)
-						fprintf('%s: max pixel out of range (%f), changing FFTScaleFactor\n',mfilename,maximum_pixel_value)
+						fprintf('%s: maximum pixel (%.1e) in a bad range\n',mfilename,maximum_pixel_value)
 						g.FFTScaleFactor = g.FFTScaleFactor * 1000 / maximum_pixel_value;
-                        img = img * 1000 / maximum_pixel_value; % make the max pixel value ~1000
+						fprintf('%s: changing FFTScaleFactor to %.1e\n',mfilename,g.FFTScaleFactor)            
+                        img = img * 1000 / maximum_pixel_value; % max pixel value is 1000
 					 end
                 end
-                fprintf('%s: maximum pixel value = %.1f (g.FFTScaleFactor=%.1e)\n',mfilenme,max(abs(img(:))),g.FFTScaleFactor);
+                fprintf('%s: maximum pixel value = %.1f\n',mfilename,max(abs(img(:))));
                 
                 % send images slice by slice
                 for z = 1:nz
