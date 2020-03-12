@@ -10,7 +10,7 @@ An example of how to use matlab gadgets in [this old version](https://github.com
 
 4. Convert the twix file into h5 format. This is a mysterious process involving parameter maps and HDF5.
 
-```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 --user-map ./IsmrmrdParameterMap_Siemens_dens_3d_mc.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens_dens_3d_mc.xsl -z 2```
+```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 --user-map ./IsmrmrdParameterMap_Siemens_matlab.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens_matlab.xsl -z 2```
 
 5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which uses the ```matlab_recon.m``` script
 
