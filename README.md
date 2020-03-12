@@ -12,9 +12,9 @@ An example of how to use matlab gadgets in [this old version](https://github.com
 
 ```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 --user-map ./IsmrmrdParameterMap_Siemens_dens_3d_mc.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens_dens_3d_mc.xsl -z 2```
 
-5. Send ```testdata.h5``` to gadgetron with the minimalist ```matlab_recon.xml``` pipeline which in turn points to the ```matlab_recon.m``` script
+5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which uses the ```matlab_recon.m``` script
 
-``gadgetron_ismrmrd_client -f testdata.h5 -C ./matlab_recon.xml```
+```gadgetron_ismrmrd_client -f testdata.h5 -C ./matlab_recon.xml```
 
 6. Hopefully the ```gadgetron``` server will spring to life
 ```03-11 17:39:58.315 INFO [main.cpp:101] Starting Gadgetron (version 3.17.0)
@@ -92,3 +92,5 @@ matlab_recon: maximum pixel value = 1272.4
 ```>> info = h5info('~/gadgetron/example/out.h5');
 >> im = h5read('~/gadgetron/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
 >> imagesc(im(:,:,1))```
+
+9. If this works then you are ready to move onto the scanner.
