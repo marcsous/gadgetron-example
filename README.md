@@ -94,3 +94,4 @@ info = h5info('~/gadgetron/example/out.h5');
 im = h5read('~/gadgetron/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
 imagesc(im(:,:,17))
 ```
+9. If this works then it's time to do it on the scanner - email me.
