@@ -227,10 +227,11 @@
                         <xsl:when test="siemens/MEAS/sKSpace/ucTrajectory = 1">cartesian</xsl:when>
                         <xsl:when test="siemens/MEAS/sKSpace/ucTrajectory = 2">radial</xsl:when>
                         <xsl:when test="siemens/MEAS/sKSpace/ucTrajectory = 4">spiral</xsl:when>
-                        <xsl:when test="siemens/MEAS/sKSpace/ucTrajectory = 8">propeller</xsl:when>
+                        <xsl:when test="siemens/MEAS/sKSpace/ucTrajectory = 8">propellor</xsl:when>
                         <xsl:otherwise>other</xsl:otherwise>
                     </xsl:choose>
                 </trajectory>
+
                 <xsl:if test="siemens/MEAS/sKSpace/ucTrajectory = 4">
                     <trajectoryDescription>
                         <identifier>HargreavesVDS2000</identifier>
@@ -739,7 +740,7 @@
                     <!-- /xsl:if -->
 	    	</xsl:for-each>    
 
-		    <xsl:if test="siemens/MEAS/sAngio/sFlowArray/lSize">
+		<xsl:if test="siemens/MEAS/sAngio/sFlowArray/lSize">
                     <userParameterLong>
                         <name>VENC_0</name>
                         <value>
@@ -1011,21 +1012,8 @@
                     </userParameterDouble>
                 </xsl:if>
 
-                 <userParameterString>
-                    <name>reconstructionMode</name>
-                    <value>
-                    <xsl:choose>
-                        <xsl:when test="siemens/MEAS/ucReconstructionMode = 1">magnitude</xsl:when>
-                        <xsl:when test="siemens/MEAS/ucReconstructionMode = 2">phase</xsl:when>
-                        <xsl:when test="siemens/MEAS/ucReconstructionMode = 4">real_part</xsl:when>
-                        <xsl:when test="siemens/MEAS/ucReconstructionMode = 8">magn_phase</xsl:when>
-                        <xsl:when test="siemens/MEAS/ucReconstructionMode =16">real_phase</xsl:when>
-                        <xsl:when test="siemens/MEAS/ucReconstructionMode =32">psir</xsl:when>
-			<xsl:otherwise>other</xsl:otherwise>
-		    </xsl:choose>
-		    </value>
-                 </userParameterString>
-	 </userParameters>
+	    </userParameters>
+
         </ismrmrdHeader>
     </xsl:template>
 
