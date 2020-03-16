@@ -32,10 +32,9 @@ classdef matlab_recon < handle & BaseGadget
         function g = process(g, head, data)
 
             % extract size info
-            nc = size(data,2); % no. coils            
-            nx = g.xml.encoding.encodedSpace.matrixSize.x; % read
-            ny = g.xml.encoding.encodedSpace.matrixSize.y; % phase
-            nz = g.xml.encoding.encodedSpace.matrixSize.z; % partition
+            [nx nc] = size(data); % readout pts / no. coils            
+            ny = g.xml.encoding.encodingLimits.kspace_encoding_step_1.maximum+1; % phase
+            nz = g.xml.encoding.encodingLimits.kspace_encoding_step_2.maximum+1; % partition
             ne = g.xml.encoding.encodingLimits.contrast.maximum+1; % no. echos
             na = g.xml.encoding.encodingLimits.average.maximum+1; % no. averages
             nr = g.xml.encoding.encodingLimits.repetition.maximum+1; % repetitions
@@ -52,7 +51,6 @@ classdef matlab_recon < handle & BaseGadget
             end
             
             % acquisition header details
-            x = size(data,1);
             y = head.idx.kspace_encode_step_1+1;
             z = head.idx.kspace_encode_step_2+1;
             e = head.idx.contrast+1;
@@ -64,11 +62,11 @@ classdef matlab_recon < handle & BaseGadget
 
             % save raw data for reconstruction
             g.counter(y,z,e) = g.counter(y,z,e) + 1;
-            g.raw(1:x,:,y,z,e) = g.raw(1:x,:,y,z,e) + data;
+            g.raw(:,:,y,z,e) = g.raw(:,:,y,z,e) + data;
 
             % trigger reconstruction
             if head.flagIsSet(head.FLAGS.ACQ_LAST_IN_MEASUREMENT)
- 
+
                 fprintf('%s: raw size = [%s]\n',mfilename,num2str(size(g.raw)));
                
                 % check all data were acquired
@@ -76,18 +74,18 @@ classdef matlab_recon < handle & BaseGadget
                     fprintf('%s: warning not all data were acquired\n',mfilename);
                 end
                 
-                % a basic reconstruction
+                % a basic reconstruction (full sampling)
                 img = g.raw(:,:,:,:,e) * g.FFTScaleFactor / na;
                 img = permute(img,[1 3 4 2]); % xyzc
                 img = fft(fft2(img),[],3); % 3D fft
                 img = sqrt(sum(abs(img).^2,4)); % sos
                 
                 % remove oversampling
-                nx = g.xml.encoding.reconSpace.matrixSize.x;
-                ny = g.xml.encoding.reconSpace.matrixSize.y;
-                nz = g.xml.encoding.reconSpace.matrixSize.z;
-                img = circshift(img,size(img)+[nx ny nz]/2);
-                img = img(1:nx,1:ny,1:nz);
+                osf(1) = g.xml.encoding.encodedSpace.matrixSize.x/g.xml.encoding.reconSpace.matrixSize.x;
+                osf(2) = g.xml.encoding.encodedSpace.matrixSize.y/g.xml.encoding.reconSpace.matrixSize.y;
+                osf(3) = g.xml.encoding.encodedSpace.matrixSize.z/g.xml.encoding.reconSpace.matrixSize.z;
+                img = circshift(img,[nx ny nz].*(1+0.5./osf));
+                img = img(1:nx/osf(1),1:ny/osf(2),1:nz/osf(3));
                 fprintf('%s: image size = [%s]\n',mfilename,num2str(size(img)));                         
  
                 % create image header
@@ -99,13 +97,13 @@ classdef matlab_recon < handle & BaseGadget
                 img_head.field_of_view(2) = g.xml.encoding.reconSpace.fieldOfView_mm.y; % mm
                 slice_thickness = g.xml.encoding.reconSpace.fieldOfView_mm.z/nz; % mm
                 img_head.field_of_view(3) = slice_thickness; % mm
-                img_head.read_dir(:) = head.phase_dir;
-                img_head.phase_dir(:) = head.read_dir;
-                img_head.slice_dir(:) = -head.slice_dir;
+                img_head.read_dir(:) = -head.read_dir;
+                img_head.phase_dir(:) = -head.phase_dir;
+                img_head.slice_dir(:) = +head.slice_dir;
                 img_head.patient_table_position(:) = head.patient_table_position;
                 img_head.acquisition_time_stamp(1) = head.acquisition_time_stamp;
-                img_head.matrix_size(1) = nx;
-                img_head.matrix_size(2) = ny;
+                img_head.matrix_size(1) = size(img,1);
+                img_head.matrix_size(2) = size(img,2);
                 img_head.matrix_size(3) = 1; % 2D image
                 img_head.set(1) = 0;
                 img_head.contrast(1) = e-1;
@@ -123,10 +121,10 @@ classdef matlab_recon < handle & BaseGadget
                 fprintf('%s: maximum pixel value = %.1f\n',mfilename,max(abs(img(:))));
                 
                 % send images slice by slice
-                for z = 1:nz
+                for z = 1:size(img,3)
                     
                     % set header properties
-                    img_head.image_index(1) = (nz-z+1) + (e-1)*nz;
+                    img_head.image_index(1) = z + (e-1)*nz;
                     img_head.position(:) = head.position + img_head.slice_dir * slice_thickness * (z-nz/2-1/2);
                     
                     % put on the queue (Q)
