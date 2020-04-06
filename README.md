@@ -94,4 +94,4 @@ matlab_recon: maximum pixel value = 1272.4
 >> im = h5read('~/gadgetron3.17/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
 >> imagesc(im(:,:,17))
 ```
-9. If this works then it's time to do it on the scanner - [email me](markbydder@gmail.com).
+9. If this works then it's time to do it on the scanner - [email me](mailto:markbydder@gmail.com).
