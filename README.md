@@ -2,17 +2,17 @@
 
 An example of how to use matlab gadgets using an [old version](https://github.com/marcsous/gadgetron) of gadgetron.
 
-1. Start by installing an [old version](https://github.com/marcsous/gadgetron) of gadgetron
+1. Start by installing this [old version](https://github.com/marcsous/gadgetron) of gadgetron
 
 2. Launch ```gadgetron``` server
 
-3. Open a new shell and ```cd ~/gadgetron/example```
+3. Open a new shell and ```cd ~/gadgetron3.17/example```
 
-4. Convert the twix file into h5 format. This is a mysterious process involving parameter maps and HDF5.
+4. Convert the twix file into h5 format. This is a mysterious process involving HDF5 and parameter maps that are normally located in ```~/gadgetron3.17/mrprogs/siemens_to_ismrmrd/parameter_maps```.
 
-```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 -z 2 --user-map ./IsmrmrdParameterMap_Siemens_matlab.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens_matlab.xsl```
+```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 -z 2 --user-map ./IsmrmrdParameterMap_Siemens.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens.xsl```
 
-5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which points to the ```matlab_recon.m``` script
+5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which refers to the ```matlab_recon.m``` script normally located in the ```~/gadgetron3.17/recon``` folder.
 
 ```gadgetron_ismrmrd_client -f testdata.h5 -C ./matlab_recon.xml```
 
@@ -90,8 +90,8 @@ matlab_recon: maximum pixel value = 1272.4
 
 8. Read it into Matlab - again using the mysterious HDF5 - and take a look.
 ```
-info = h5info('~/gadgetron/example/out.h5');
-im = h5read('~/gadgetron/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
+info = h5info('~/gadgetron3.17/example/out.h5');
+im = h5read('~/gadgetron3.17/example/out.h5',strcat(info.Groups.Groups(1).Name,'/data'));
 imagesc(im(:,:,17))
 ```
 9. If this works then it's time to do it on the scanner - email me.
