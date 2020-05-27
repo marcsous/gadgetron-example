@@ -12,7 +12,7 @@ An example of how to use matlab gadgets using gadgetron.
 
 ```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 -z 2 --user-map ./IsmrmrdParameterMap_Siemens.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens.xsl```
 
-5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which refers to the ```matlab_recon.m``` script normally located in the ```~/gadgetron3.17/recon``` folder.
+5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which refers to the ```matlab_recon.m``` script.
 
 ```gadgetron_ismrmrd_client -f testdata.h5 -C ./matlab_recon.xml```
 
