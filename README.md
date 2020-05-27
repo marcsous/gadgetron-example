@@ -1,6 +1,6 @@
 # gadgetron-example
 
-An example of how to use matlab gadgets using an [old version](https://github.com/marcsous/gadgetron) of gadgetron.
+An example of how to use matlab gadgets using gadgetron.
 
 1. Start by installing this [old version](https://github.com/marcsous/gadgetron) of gadgetron
 
