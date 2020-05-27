@@ -32,7 +32,7 @@
      <name>MatlabAcquisition</name>
      <dll>gadgetron_matlab</dll>
      <classname>AcquisitionMatlabGadget</classname>
-     <property><name>matlab_path</name><value>~/gadgetron/example</value></property>
+     <property><name>matlab_path</name><value>~/gadgetron3.17/example</value></property>
      <property><name>matlab_classname</name><value>matlab_recon</value></property>
      <property><name>matlab_port</name><value>3001</value></property>
      <property><name>matlab_buffer_time_ms</name><value>100</value></property>
