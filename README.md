@@ -14,7 +14,7 @@ An example of how to use matlab gadgets using gadgetron.
 
 5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which refers to the ```matlab_recon.m``` script.
 
-```gadgetron_ismrmrd_client -f testdata.h5 -C ./matlab_recon.xml```
+```gadgetron_ismrmrd_client -p 9001 -f testdata.h5 -C ./matlab_recon.xml```
 
 6. Hopefully now the ```gadgetron``` server will spring to life
 ```
