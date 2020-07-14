@@ -8,11 +8,11 @@ An example of how to use matlab gadgets using gadgetron.
 
 3. Open a new shell and ```cd ~/gadgetron3.17/example```
 
-4. Convert the twix file into h5 format. This is a mysterious process involving HDF5 and parameter maps that are normally located in ```~/gadgetron3.17/mrprogs/siemens_to_ismrmrd/parameter_maps```.
+4. Convert the .dat file into .h5 format. This is a mysterious process involving HDF5 and parameter maps
 
 ```siemens_to_ismrmrd -f meas_flash3d.dat -o testdata.h5 -z 2 --user-map ./IsmrmrdParameterMap_Siemens.xml --user-stylesheet ./IsmrmrdParameterMap_Siemens.xsl```
 
-5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which refers to the ```matlab_recon.m``` script.
+5. Send ```testdata.h5``` to gadgetron using the ```matlab_recon.xml``` pipeline which points to the ```matlab_recon.m``` script.
 
 ```gadgetron_ismrmrd_client -p 9001 -f testdata.h5 -C ./matlab_recon.xml```
 
