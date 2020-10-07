@@ -4,7 +4,7 @@ An example of how to use matlab gadgets using gadgetron.
 
 1. Start by installing this [old version](https://github.com/marcsous/gadgetron) of gadgetron
 
-2. Launch ```gadgetron``` server
+2. Open a shell and launch ```gadgetron``` server
 
 3. Open a new shell and ```cd ~/gadgetron3.17/example```
 
