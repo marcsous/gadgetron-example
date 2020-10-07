@@ -4,9 +4,9 @@ An example of how to use matlab gadgets using gadgetron.
 
 1. Start by installing this [old version](https://github.com/marcsous/gadgetron) of gadgetron
 
-2. Open a shell and launch ```gadgetron``` server
+2. Open a shell and launch ```gadgetron```
 
-3. Open a new shell and ```cd ~/gadgetron3.17/example```
+3. Open another shell and ```cd ~/gadgetron3.17/example```
 
 4. Convert the .dat file into .h5 format. This is a mysterious process involving HDF5 and parameter maps
 
