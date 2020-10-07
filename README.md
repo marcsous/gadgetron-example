@@ -1,6 +1,6 @@
 # gadgetron-example
 
-An example of how to use gadgetron to execute your own ```matlab_recon.m``` reconstruction.
+An example of how to use execute your own ```matlab_recon.m``` reconstruction in gadgetron.
 
 1. Start by installing this [old version](https://github.com/marcsous/gadgetron) of gadgetron
 
